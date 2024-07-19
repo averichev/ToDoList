@@ -20,7 +20,7 @@ public class ToDoItemsController : ControllerBase
     public async Task<IActionResult> CreateToDoItem([FromBody] ToDoItemCreateDto toDoItemCreateDto)
     {
         var newItemId = await _toDoItemService.CreateToDoItemAsync(toDoItemCreateDto);
-        var result = ToDoItemId.New(newItemId);
+        var result = ToDoItemIdView.New(newItemId);
         return Ok(result);
     }
 }
