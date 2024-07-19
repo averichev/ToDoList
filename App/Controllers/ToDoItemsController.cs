@@ -16,6 +16,11 @@ public class ToDoItemsController : ControllerBase
         _toDoItemService = toDoItemService;
     }
 
+    /// <summary>
+    /// Создает новый элемент ToDo.
+    /// </summary>
+    /// <param name="toDoItemCreateDto">DTO для создания элемента ToDo.</param>
+    /// <returns>Идентификатор созданного элемента.</returns>
     [HttpPost]
     public async Task<IActionResult> CreateToDoItem([FromBody] ToDoItemCreateDto toDoItemCreateDto)
     {
