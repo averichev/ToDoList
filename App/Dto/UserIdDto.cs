@@ -13,7 +13,7 @@ public class UserIdDto: IUserId
         Value = value;
     }
 
-    static UserIdDto New(string value)
+    internal static UserIdDto New(string value)
     {
         return new UserIdDto(value);
     }

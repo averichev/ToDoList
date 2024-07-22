@@ -1,27 +1,36 @@
+using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo
-{
-    Version = "v0.1",
-    Title = "Todo list API",
-    Description = "Веб-приложение для управления списком задач",
-    Contact = new OpenApiContact
+services.AddControllers();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen(
+    c =>
     {
-        Name = "Аверичев А.",
-        Url = new Uri("https://github.com/averichev")
+        c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Version = "v0.1",
+                Title = "Todo list API",
+                Description = "Веб-приложение для управления списком задач",
+                Contact = new OpenApiContact
+                {
+                    Name = "Аверичев А.",
+                    Url = new Uri("https://github.com/averichev")
+                }
+            }
+        );
+        c.ExampleFilters();
+        c.OperationFilter<AddResponseHeadersFilter>();
     }
-}));
+);
+
+services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

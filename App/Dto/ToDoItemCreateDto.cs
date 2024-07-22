@@ -1,11 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using Domain.Enums;
 using Domain.Interfaces;
-using Swashbuckle.AspNetCore.Filters;
 
 namespace App.Dto;
 
-public class ToDoItemCreateDto : IToDoItemCreate, IExamplesProvider<ToDoItemCreateDto>
+public class ToDoItemCreateDto : IToDoItemCreate
 {
     public string Title { get; set; }
     public string Description { get; set; }
@@ -18,17 +17,5 @@ public class ToDoItemCreateDto : IToDoItemCreate, IExamplesProvider<ToDoItemCrea
     IUserId IToDoItemCreate.UserId()
     {
         return UserId;
-    }
-
-    public ToDoItemCreateDto GetExamples()
-    {
-        return new ToDoItemCreateDto
-        {
-            Title = "Купить хлеб",
-            Description = "Купить батон",
-            DueDate = DateTime.Now,
-            Priority = Priority.Low,
-            UserId = new UserIdDto{}
-        };
     }
 }
