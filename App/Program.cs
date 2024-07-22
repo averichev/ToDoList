@@ -1,8 +1,11 @@
 using System.Reflection;
+using Domain.Interfaces;
+using Domain.Services;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var services = builder.Services;
 
 services.AddControllers();
@@ -28,6 +31,7 @@ services.AddSwaggerGen(
 );
 
 services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
+services.AddScoped<IToDoItemService, ToDoItemService>();
 
 var app = builder.Build();
 

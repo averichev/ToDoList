@@ -5,16 +5,10 @@ namespace App.Dto;
 
 public class UserIdDto: IUserId
 {
+    public UserIdDto()
+    {
+    }
+
     [Required]
-    public string Value { get; }
-
-    private UserIdDto(string value)
-    {
-        Value = value;
-    }
-
-    internal static UserIdDto New(string value)
-    {
-        return new UserIdDto(value);
-    }
+    public string Value { get; set; }
 }

@@ -14,5 +14,5 @@ internal class ToDoItemIdView
         return new ToDoItemIdView(toDoItemId);
     }
 
-    string Value { get; }
+    public string Value { get; }
 }

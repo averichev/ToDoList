@@ -14,7 +14,10 @@ public class SwaggerExamples : IExamplesProvider<ToDoItemCreateDto>
             Description = "Купить батон",
             DueDate = DateTime.Now,
             Priority = Priority.Low,
-            UserId = UserIdDto.New("user-id")
+            UserId = new UserIdDto
+            {
+                Value = "user-id"
+            }
         };
     }
 }
