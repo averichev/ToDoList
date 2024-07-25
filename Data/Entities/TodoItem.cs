@@ -26,7 +26,8 @@ internal class TodoItem : ITodoItem
         {
             Priority = (byte)create.Priority,
             Description = create.Description,
-            Title = create.Title
+            Title = create.Title,
+            UserId = int.Parse(create.UserId().Value())
         };
     }
 

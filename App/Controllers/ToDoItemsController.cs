@@ -2,12 +2,11 @@ using App.Dto;
 using App.View;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using TodoItemId = App.Dto.TodoItemId;
 
 namespace App.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class ToDoItemsController : ControllerBase
 {
     private readonly ITodoItemService _todoItemService;
@@ -33,12 +32,12 @@ public class ToDoItemsController : ControllerBase
     /// <summary>
     /// Читает задачу по Id  
     /// </summary>
-    /// <param name="todoItemId">DTO для создания элемента ToDo.</param>
-    /// <returns>Идентификатор созданного элемента.</returns>
-    [HttpPost]
-    public async Task<IActionResult> ReadToDoItem([FromBody] TodoItemId todoItemId)
+    /// <returns>DTO задачи</returns>
+    [HttpGet]
+    [Route("{todoItemId}")]
+    public async Task<IActionResult> ReadToDoItem([FromRoute] string todoItemId)
     {
-        var exist = await _todoItemService.ReadTodoItemAsync(todoItemId);
+        var exist = await _todoItemService.ReadTodoItemAsync(Domain.Entities.TodoItemId.New(todoItemId));
         var m = exist.Match<IActionResult>(
             some: x => Ok(ToDoItemView.New(x)),
             none: () => NotFound("Задача не найдена")
