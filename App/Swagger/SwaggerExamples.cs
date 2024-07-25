@@ -13,11 +13,7 @@ public class SwaggerExamples : IExamplesProvider<TodoItemCreateDto>
             Title = "Купить хлеб",
             Description = "Купить батон",
             DueDate = DateTime.Now,
-            Priority = Priority.Low,
-            UserId = new UserIdDto
-            {
-                Value = "user-id"
-            }
+            Priority = Priority.Low
         };
     }
 }

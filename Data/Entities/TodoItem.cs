@@ -11,7 +11,9 @@ internal class TodoItem
 {
     [Key]
     public int Id { get; set; }
-    public string Description { get; set; } = "";
+    
+    public string Title { get; set; }
+    public string Description { get; set; }
     public Priority Priority { get; set; }
 
     internal static TodoItem Create(ITodoItemCreate create)
@@ -20,6 +22,7 @@ internal class TodoItem
         {
             Priority = create.Priority,
             Description = create.Description,
+            Title = create.Title
         };
     }
 
