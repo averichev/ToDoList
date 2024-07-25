@@ -1,6 +1,6 @@
 namespace Domain.Interfaces;
 
-public interface IToDoItemId
+public interface ITodoItemId
 {
     public string Value { get; }
 }

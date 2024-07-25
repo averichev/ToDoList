@@ -1,6 +1,6 @@
 namespace Domain.Factories;
 
-public class ToDoItemFactory
+public class TodoItemFactory
 {
     
 }

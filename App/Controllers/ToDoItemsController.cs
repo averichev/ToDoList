@@ -9,22 +9,22 @@ namespace App.Controllers;
 [Route("api/[controller]")]
 public class ToDoItemsController : ControllerBase
 {
-    private readonly IToDoItemService _toDoItemService;
+    private readonly ITodoItemService _todoItemService;
 
-    public ToDoItemsController(IToDoItemService toDoItemService)
+    public ToDoItemsController(ITodoItemService todoItemService)
     {
-        _toDoItemService = toDoItemService;
+        _todoItemService = todoItemService;
     }
 
     /// <summary>
     /// Создает новый элемент ToDo.
     /// </summary>
-    /// <param name="toDoItemCreateDto">DTO для создания элемента ToDo.</param>
+    /// <param name="todoItemCreateDto">DTO для создания элемента ToDo.</param>
     /// <returns>Идентификатор созданного элемента.</returns>
     [HttpPost]
-    public async Task<IActionResult> CreateToDoItem([FromBody] ToDoItemCreateDto toDoItemCreateDto)
+    public async Task<IActionResult> CreateToDoItem([FromBody] TodoItemCreateDto todoItemCreateDto)
     {
-        var newItemId = await _toDoItemService.CreateToDoItemAsync(toDoItemCreateDto);
+        var newItemId = await _todoItemService.CreateTodoItemAsync(todoItemCreateDto);
         var result = ToDoItemIdView.New(newItemId);
         return Ok(result);
     }

@@ -4,14 +4,14 @@ namespace App.View;
 
 internal class ToDoItemIdView
 {
-    private ToDoItemIdView(IToDoItemId toDoItemId)
+    private ToDoItemIdView(ITodoItemId todoItemId)
     {
-        Value = toDoItemId.Value;
+        Value = todoItemId.Value;
     }
 
-    internal static ToDoItemIdView New(IToDoItemId toDoItemId)
+    internal static ToDoItemIdView New(ITodoItemId todoItemId)
     {
-        return new ToDoItemIdView(toDoItemId);
+        return new ToDoItemIdView(todoItemId);
     }
 
     public string Value { get; }

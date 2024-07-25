@@ -1,50 +1,26 @@
-using System.Reflection;
-using Domain.Interfaces;
-using Domain.Services;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
+namespace App;
 
-var builder = WebApplication.CreateBuilder(args);
-
-var services = builder.Services;
-
-services.AddControllers();
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen(
-    c =>
-    {
-        c.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Version = "v0.1",
-                Title = "Todo list API",
-                Description = "Веб-приложение для управления списком задач",
-                Contact = new OpenApiContact
-                {
-                    Name = "Аверичев А.",
-                    Url = new Uri("https://github.com/averichev")
-                }
-            }
-        );
-        c.ExampleFilters();
-        c.OperationFilter<AddResponseHeadersFilter>();
-    }
-);
-
-services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
-services.AddScoped<IToDoItemService, ToDoItemService>();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+internal static class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host
+            .CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }
 
-app.UseHttpsRedirection();
+// var builder = WebApplication.CreateBuilder(args);
+//
+// var services = builder.Services;
+//
 
-app.UseAuthorization();
+//
+// var app = builder.Build();
+//
 
-app.MapControllers();
-
-app.Run();
+//
+// app.Run();

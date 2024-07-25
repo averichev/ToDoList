@@ -2,7 +2,7 @@ using Domain.Enums;
 
 namespace Domain.Interfaces;
 
-public interface IToDoItemCreate
+public interface ITodoItemCreate
 {
     public string Title { get; }
     public string Description { get; }

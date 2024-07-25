@@ -4,7 +4,7 @@ using Domain.Interfaces;
 
 namespace App.Dto;
 
-public class ToDoItemCreateDto : IToDoItemCreate
+public class TodoItemCreateDto : ITodoItemCreate
 {
     public string Title { get; set; }
     public string Description { get; set; }
@@ -14,7 +14,7 @@ public class ToDoItemCreateDto : IToDoItemCreate
     [Required]
     public UserIdDto UserId { get; set; }
 
-    IUserId IToDoItemCreate.UserId()
+    IUserId ITodoItemCreate.UserId()
     {
         return UserId;
     }
