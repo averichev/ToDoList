@@ -3,7 +3,6 @@ using Data;
 using Data.Repositories;
 using Domain.Interfaces;
 using Domain.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -40,7 +39,10 @@ internal class Startup
         services.AddDbContext<TodoDbContext>();
 
         services.AddScoped<ITodoItemService, TodoItemService>();
+        services.AddScoped<IUserService, UserService>();
+        
         services.AddScoped<ITodoItemRepository, TodoItemRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
     }
 
     public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

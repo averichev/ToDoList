@@ -3,7 +3,7 @@ using Domain.Interfaces;
 
 namespace Data.Repositories;
 
-public class TodoItemRepository: ITodoItemRepository
+internal class TodoItemRepository: ITodoItemRepository
 {
     private readonly TodoDbContext _context;
 

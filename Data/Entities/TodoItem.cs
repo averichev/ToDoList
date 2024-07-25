@@ -15,6 +15,9 @@ internal class TodoItem
     public string Description { get; set; }
     public byte Priority { get; set; }
 
+    public User User { get; set; }
+    public int UserId { get; set; }
+
     internal static TodoItem Create(ITodoItemCreate create)
     {
         return new TodoItem

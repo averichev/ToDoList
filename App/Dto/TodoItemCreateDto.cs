@@ -10,4 +10,12 @@ public class TodoItemCreateDto : ITodoItemCreate
     public string Description { get; set; }
     public DateTime DueDate { get; set; }
     public Priority Priority { get; set; }
+
+    [Required]
+    public UserIdDto UserId { get; set; }
+
+    IUserId ITodoItemCreate.UserId()
+    {
+        return UserId;
+    }
 }

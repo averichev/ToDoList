@@ -8,4 +8,5 @@ public interface ITodoItemCreate
     public string Description { get; }
     public DateTime DueDate { get; }
     public Priority Priority { get; }
+    public IUserId UserId();
 }
