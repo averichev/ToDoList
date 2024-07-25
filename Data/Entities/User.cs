@@ -9,6 +9,7 @@ public class User
 {
     [Key]
     public int Id { get; set; }
+
     public string Username { get; set; }
 
     internal static User Create(IUserCreate userCreate)
@@ -21,14 +22,26 @@ public class User
 
     internal IUserId UserId()
     {
-        return new UserId
-        {
-            Value = Id.ToString()
-        };
+        return Entities.UserId.New(Id);
     }
 }
 
 internal class UserId : IUserId
 {
-    public string Value { get; internal set; }
+    private string _value;
+
+    private UserId(string value)
+    {
+        _value = value;
+    }
+
+    internal static IUserId New(int value)
+    {
+        return new UserId(value.ToString());
+    }
+
+    string IUserId.Value()
+    {
+        return _value;
+    }
 }

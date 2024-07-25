@@ -1,4 +1,5 @@
 using Domain.Interfaces;
+using Optional;
 
 namespace Domain.Services;
 
@@ -11,7 +12,11 @@ internal class TodoItemService : ITodoItemService
     }
     public async Task<ITodoItemId> CreateTodoItemAsync(ITodoItemCreate item)
     {
-        var id = await _repository.CreateTodoItemAsync(item);
-        return id;
+        return await _repository.CreateTodoItemAsync(item);
+    }
+
+    public async Task<Option<ITodoItem>> ReadTodoItemAsync(ITodoItemId todoItemId)
+    {
+        return await _repository.ReadTodoItemAsync(todoItemId);
     }
 }

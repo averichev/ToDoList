@@ -6,7 +6,7 @@ using Domain.Interfaces;
 namespace Data.Entities;
 
 [Table("TodoItem")]
-internal class TodoItem
+internal class TodoItem : ITodoItem
 {
     [Key]
     public int Id { get; set; }
@@ -17,6 +17,8 @@ internal class TodoItem
 
     public User User { get; set; }
     public int UserId { get; set; }
+
+    public DateTime DueDate { get; set; }
 
     internal static TodoItem Create(ITodoItemCreate create)
     {
@@ -30,9 +32,36 @@ internal class TodoItem
 
     internal ITodoItemId TodoItemId()
     {
-        return new TodoItemId
-        {
-            Value = Id.ToString()
-        };
+        return Entities.TodoItemId.New(Id);
+    }
+
+    ITodoItemId ITodoItem.Id()
+    {
+        return Domain.Entities.TodoItemId.FromInt(Id);
+    }
+
+    string ITodoItem.Title()
+    {
+        return Title;
+    }
+
+    string ITodoItem.Description()
+    {
+        return Description;
+    }
+
+    DateTime ITodoItem.DueDate()
+    {
+        return DueDate;
+    }
+
+    Priority ITodoItem.Priority()
+    {
+        return (Priority)Priority;
+    }
+
+    IUserId ITodoItem.UserId()
+    {
+        return Domain.Entities.UserId.New(UserId);
     }
 }

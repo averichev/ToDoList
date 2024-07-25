@@ -1,11 +1,10 @@
 using Domain.Interfaces;
 
-namespace Data.Entities;
+namespace Domain.Entities;
 
-internal class TodoItemId : ITodoItemId
+public class TodoItemId: ITodoItemId
 {
     private readonly string _value;
-
     private TodoItemId(string value)
     {
         _value = value;
@@ -15,7 +14,8 @@ internal class TodoItemId : ITodoItemId
     {
         return new TodoItemId(value);
     }
-    public static ITodoItemId New(int value)
+    
+    public static ITodoItemId FromInt(int value)
     {
         return new TodoItemId(value.ToString());
     }

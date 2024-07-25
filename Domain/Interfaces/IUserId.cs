@@ -2,5 +2,5 @@ namespace Domain.Interfaces;
 
 public interface IUserId
 {
-    public string Value { get; }
+    public string Value();
 }

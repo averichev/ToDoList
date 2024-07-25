@@ -2,6 +2,7 @@ using App.Dto;
 using App.View;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using TodoItemId = App.Dto.TodoItemId;
 
 namespace App.Controllers;
 
@@ -27,5 +28,21 @@ public class ToDoItemsController : ControllerBase
         var newItemId = await _todoItemService.CreateTodoItemAsync(todoItemCreateDto);
         var result = ToDoItemIdView.New(newItemId);
         return Ok(result);
+    }
+
+    /// <summary>
+    /// Читает задачу по Id  
+    /// </summary>
+    /// <param name="todoItemId">DTO для создания элемента ToDo.</param>
+    /// <returns>Идентификатор созданного элемента.</returns>
+    [HttpPost]
+    public async Task<IActionResult> ReadToDoItem([FromBody] TodoItemId todoItemId)
+    {
+        var exist = await _todoItemService.ReadTodoItemAsync(todoItemId);
+        var m = exist.Match<IActionResult>(
+            some: x => Ok(ToDoItemView.New(x)),
+            none: () => NotFound("Задача не найдена")
+        );
+        return m;
     }
 }

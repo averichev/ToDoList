@@ -11,7 +11,7 @@ public class UserIdView
 
     public static UserIdView New(IUserId userId)
     {
-        return new UserIdView(userId.Value);
+        return new UserIdView(userId.Value());
     }
 
     public string Value { get; private set; }

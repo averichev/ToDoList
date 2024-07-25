@@ -6,7 +6,7 @@ internal class ToDoItemIdView
 {
     private ToDoItemIdView(ITodoItemId todoItemId)
     {
-        Value = todoItemId.Value;
+        Value = todoItemId.Value();
     }
 
     internal static ToDoItemIdView New(ITodoItemId todoItemId)

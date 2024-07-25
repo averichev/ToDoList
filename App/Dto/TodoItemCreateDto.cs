@@ -11,11 +11,11 @@ public class TodoItemCreateDto : ITodoItemCreate
     public DateTime DueDate { get; set; }
     public Priority Priority { get; set; }
 
-    [Required]
-    public UserIdDto UserId { get; set; }
-
     IUserId ITodoItemCreate.UserId()
     {
-        return UserId;
+        return Domain.Entities.UserId.New(UserId);
     }
+
+    [Required]
+    public string UserId { get; set; }
 }

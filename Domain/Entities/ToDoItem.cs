@@ -1,15 +1,37 @@
 using Domain.Enums;
+using Domain.Interfaces;
 
 namespace Domain.Entities;
 
-internal class ToDoItem
+public class ToDoItem : ITodoItem
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public bool IsCompleted { get; set; }
-    public DateTime DueDate { get; set; }
-    public Priority Priority { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; }
+    public ITodoItemId Id()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string Title()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string Description()
+    {
+        throw new NotImplementedException();
+    }
+
+    public DateTime DueDate()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Priority Priority()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IUserId UserId()
+    {
+        throw new NotImplementedException();
+    }
 }

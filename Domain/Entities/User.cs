@@ -1,8 +1,20 @@
+using Domain.Interfaces;
+
 namespace Domain.Entities;
 
-internal class User
+public class User : IUser
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public ICollection<ToDoItem> ToDoItems { get; set; }
+    private User(string username, IUserId id)
+    {
+        Username = username;
+        Id = id;
+    }
+
+    public static IUser New(string username, IUserId id)
+    {
+        return new User(username, id);
+    }
+
+    public IUserId Id { get; }
+    public string Username { get; }
 }
