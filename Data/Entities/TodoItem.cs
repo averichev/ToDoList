@@ -5,22 +5,21 @@ using Domain.Interfaces;
 
 namespace Data.Entities;
 
-
 [Table("TodoItem")]
 internal class TodoItem
 {
     [Key]
     public int Id { get; set; }
-    
+
     public string Title { get; set; }
     public string Description { get; set; }
-    public Priority Priority { get; set; }
+    public byte Priority { get; set; }
 
     internal static TodoItem Create(ITodoItemCreate create)
     {
         return new TodoItem
         {
-            Priority = create.Priority,
+            Priority = (byte)create.Priority,
             Description = create.Description,
             Title = create.Title
         };
