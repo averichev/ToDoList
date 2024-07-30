@@ -20,14 +20,25 @@ internal class TodoItem : ITodoItem
 
     public DateTime DueDate { get; set; }
 
-    internal static TodoItem Create(ITodoItemCreate create)
+    internal static TodoItem Create(ITodoItemSave save)
     {
         return new TodoItem
         {
-            Priority = (byte)create.Priority,
-            Description = create.Description,
-            Title = create.Title,
-            UserId = int.Parse(create.UserId().Value())
+            Priority = (byte)save.Priority,
+            Description = save.Description,
+            Title = save.Title,
+            UserId = int.Parse(save.UserId().Value())
+        };
+    }
+
+    internal static TodoItem Create(ITodoItem item)
+    {
+        return new TodoItem
+        {
+            Priority = (byte)item.Priority(),
+            Description = item.Description(),
+            Title = item.Title(),
+            UserId = int.Parse(item.UserId().Value())
         };
     }
 
@@ -64,5 +75,23 @@ internal class TodoItem : ITodoItem
     IUserId ITodoItem.UserId()
     {
         return Domain.Entities.UserId.New(UserId);
+    }
+
+    internal void Update(ITodoItemSave item)
+    {
+        Description = item.Description;
+        Title = item.Title;
+        Priority = (byte)item.Priority;
+        DueDate = item.DueDate;
+        UserId = Convert.ToInt32(item.UserId().Value());
+    }
+
+    internal void Update(ITodoItem item)
+    {
+        Description = item.Description();
+        Title = item.Title();
+        Priority = (byte)item.Priority();
+        DueDate = item.DueDate();
+        UserId = Convert.ToInt32(item.UserId().Value());
     }
 }

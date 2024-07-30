@@ -2,6 +2,7 @@ using App.Dto;
 using App.View;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using TodoItemId = Domain.Entities.TodoItemId;
 
 namespace App.Controllers;
 
@@ -19,12 +20,12 @@ public class ToDoItemsController : ControllerBase
     /// <summary>
     /// Создает новый элемент ToDo.
     /// </summary>
-    /// <param name="todoItemCreateDto">DTO для создания элемента ToDo.</param>
+    /// <param name="todoItemDto">DTO для создания элемента ToDo.</param>
     /// <returns>Идентификатор созданного элемента.</returns>
     [HttpPost]
-    public async Task<IActionResult> CreateToDoItem([FromBody] TodoItemCreateDto todoItemCreateDto)
+    public async Task<IActionResult> CreateToDoItem([FromBody] TodoItemDto todoItemDto)
     {
-        var newItemId = await _todoItemService.CreateTodoItemAsync(todoItemCreateDto);
+        var newItemId = await _todoItemService.CreateTodoItemAsync(todoItemDto);
         var result = ToDoItemIdView.New(newItemId);
         return Ok(result);
     }
@@ -43,5 +44,17 @@ public class ToDoItemsController : ControllerBase
             none: () => NotFound("Задача не найдена")
         );
         return m;
+    }
+
+    /// <summary>
+    /// Читает задачу по Id  
+    /// </summary>
+    /// <returns>DTO задачи</returns>
+    [HttpPut]
+    [Route("{todoItemId}")]
+    public async Task<IActionResult> UpdateToDoItem([FromRoute] string todoItemId, [FromBody] TodoItemDto todoItemDto)
+    {
+        var exist = await _todoItemService.UpdateTodoItemAsync(TodoItemId.New(todoItemId), todoItemDto);
+        return exist.Match(Succ: s => Ok(s), Fail: (f) => new );
     }
 }

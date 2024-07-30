@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Optional" Version="4.0.0" />
+      <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
     </ItemGroup>
 
 </Project>

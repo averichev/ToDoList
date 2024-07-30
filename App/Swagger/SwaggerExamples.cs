@@ -4,11 +4,11 @@ using Swashbuckle.AspNetCore.Filters;
 
 namespace App.Swagger;
 
-public class SwaggerExamples : IExamplesProvider<TodoItemCreateDto>
+public class SwaggerExamples : IExamplesProvider<TodoItemDto>
 {
-    public TodoItemCreateDto GetExamples()
+    public TodoItemDto GetExamples()
     {
-        return new TodoItemCreateDto
+        return new TodoItemDto
         {
             Title = "Купить хлеб",
             Description = "Купить батон",
